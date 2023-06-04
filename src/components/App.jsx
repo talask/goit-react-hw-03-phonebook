@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { nanoid } from 'nanoid';
 import { Contacts } from './Contacts/Contacts';
 import { ContactForm } from './ContactForm/ContactForm';
-import { Filter } from './Filter/Filter'
+import { Filter } from './Filter/Filter';
+import { Div } from './Common/App.styled'
 
 
 export class App extends Component {
@@ -57,16 +58,15 @@ export class App extends Component {
     const { filter } = this.state;
 
     return (
-      <div>
+      <Div>
         <h1>Phonebook</h1>
-          <ContactForm contactsChange={this.handleContactsChange} />
-          <h2>Contacts</h2>
+        <ContactForm contactsChange={this.handleContactsChange} />
+        <h2>Contacts</h2>
         <Filter filter={filter} filterChange={this.handleChange}/>
-        {/* <ContactList  /> */}
-        
+      
         <Contacts contacts={this.handleFilter(filter)} fnDelete={this.handleContactsDelete}/>
       
-      </div>
+      </Div>
       
     )
   }

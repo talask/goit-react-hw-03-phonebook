@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { ContactItem } from './ContactItem';
-//import { nanoid } from 'nanoid';
+import { Table } from './Contacts.styled';
+
 
 export const Contacts = ({contacts, fnDelete}) => {
     if(contacts)
     return ( 
-        <table>
+        <Table>
             <tbody>
             {contacts.map(({name, number, id}, i) => {
                 return (
@@ -21,7 +22,7 @@ export const Contacts = ({contacts, fnDelete}) => {
             }
             )}
         </tbody>
-    </table>
+    </Table>
     )
 }
 

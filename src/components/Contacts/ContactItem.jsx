@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
+import { ButtonDel, TdUserData } from './Contacts.styled';
 
-
-export const ContactItem = ({i, name, number, id, fnDelete}) => {
+export const ContactItem = ({ name, number, id, fnDelete}) => {
     return (
         <tr>
-            <td>{name}:</td> 
-            <td>{number}</td> 
-            <td>
-                <button type='button' 
+            <TdUserData >{name}:</TdUserData > 
+            <TdUserData >{number}</TdUserData > 
+            <TdUserData >
+                <ButtonDel type='button' 
                 onClick={() => {fnDelete(id)}}>
                     Delete
-                </button>
-            </td>
+                </ButtonDel>
+            </TdUserData >
         </tr>
     )
 }

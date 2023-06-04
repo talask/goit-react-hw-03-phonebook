@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
+import { InputField } from '../ContactForm/ContactForm.styled';
 
 export const Filter = ({filter, filterChange}) => {
     return (
@@ -7,7 +8,7 @@ export const Filter = ({filter, filterChange}) => {
             <p>
                 Find contacts by name
             </p>
-            <input 
+            <InputField 
             type="text"
             name="filter"
             value={filter}
