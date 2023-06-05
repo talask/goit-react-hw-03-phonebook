@@ -49,8 +49,9 @@ export class App extends Component {
       return contacts.filter(({name}) => {
         return name.toLowerCase().includes(value.toLowerCase());
       })
+    } else {
+      return contacts;
     }
-
   }
   
 
