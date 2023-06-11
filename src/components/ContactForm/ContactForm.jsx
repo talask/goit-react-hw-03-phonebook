@@ -65,5 +65,4 @@ export const ContactForm = ({contactsChange}) => {
         )
     }
 
-  //   name: yup.string(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/).required('Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d\'Artagnan'),
-  // number: yup.string(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/).required('Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'),
+  
