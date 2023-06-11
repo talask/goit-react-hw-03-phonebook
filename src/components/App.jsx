@@ -5,6 +5,7 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { Div } from './Common/App.styled'
 
+const KEY_CONTACTS = 'contacts';
 
 export class App extends Component {
   
@@ -49,11 +50,25 @@ export class App extends Component {
       return contacts.filter(({name}) => {
         return name.toLowerCase().includes(value.toLowerCase());
       })
-    } else {
+    } 
       return contacts;
+    
+  }
+  
+  componentDidMount(){
+    const contactsLS = localStorage.getItem(KEY_CONTACTS);
+    if(contactsLS !== null){
+      const contacts = JSON.parse(contactsLS);
+      this.setState({contacts});
     }
   }
   
+  componentDidUpdate(_, prevState) {
+    const {contacts} = this.state;
+    if(prevState.contacts !== contacts){
+      localStorage.setItem(KEY_CONTACTS, JSON.stringify(contacts));
+    }
+  }
 
   render() {
     const { filter } = this.state;

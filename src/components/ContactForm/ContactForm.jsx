@@ -1,72 +1,69 @@
-import React, { Component } from "react";
-import { nanoid } from 'nanoid';
-import { Form, Button, InputField } from './ContactForm.styled';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Button, DivMyForm, Label } from './ContactForm.styled';
+import * as yup from 'yup';
+import styled from 'styled-components';
 
-export class ContactForm extends Component {
-    
-    state = {
-        name: '',
-        number: '',
-      };
-     
-      
-    handleChange = evt => {
-        const { name, value } = evt.target;
-        this.setState({ [name]: value });
-        
-    };
+const InputField = styled(Field)`
+    outline: none;
+    padding: 5px 8px;
+    margin-bottom: 10px;
+    width: 250px;
+    font-size: 18px;
+`;
 
-    handleSubmit = e => {
-        e.preventDefault();
-    
-        const { name, number } = this.state;
-        this.props.contactsChange({name: name, number: number});
-       
-        this.reset();
-    };
+const ErrorField = styled(ErrorMessage)`
+  color: red;
+  font-size: 10px;
+`
 
-    reset = () => {
-        this.setState({ 
-          name: '',
-          number: '',
-        });
-    };
+const initialValues = {
+  name: '',
+  number: '',
+};
 
-    render() {
-       
-        const { name, number } = this.state;
-        return ( 
-            <Form onSubmit={this.handleSubmit}>
-                <label htmlFor={this.nameInputId}>
+const nameRegExp = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
+const phoneRegExp = /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
+const schema = yup.object().shape({
+  name: yup.string().matches(nameRegExp, 'Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d\'Artagnan').required(),
+  number: yup.string().matches(phoneRegExp, 'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +').required(),
+});
+
+export const ContactForm = ({contactsChange}) => {
+
+    return ( 
+      <DivMyForm>
+        <Formik
+            initialValues = {initialValues}
+            validationSchema = {schema}
+            onSubmit = {(values, {resetForm}) => {
+              console.log(values);
+              contactsChange(values);
+              resetForm();
+            }}
+        >
+            <Form>
+                <Label>
                  Name
-                </label>
-                <InputField
+                </Label>
+                <InputField 
                     type="text"
                     name="name"
-                    value={name}
-                    id={nanoid()}
-                    pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                    title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-                    onChange={this.handleChange}
-                    required
                 />
-       
-                <label htmlFor={this.numberInputId}>
+                <ErrorField name="name" component="div" />
+                <Label>
                     Phone
-                </label>
-                <InputField
+                </Label>
+                <InputField 
                     type="tel"
                     name="number"
-                    value={number}
-                    id={nanoid()}
-                    pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-                    title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-                    onChange={this.handleChange}
-                    required
                 />
-        
+                <ErrorField name="number" component="div" />
                 <Button type="submit">Add contact</Button>
             </Form>
+          </Formik>
+        </DivMyForm>
         )
     }
-}
+
+  //   name: yup.string(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/).required('Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d\'Artagnan'),
+  // number: yup.string(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/).required('Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'),
