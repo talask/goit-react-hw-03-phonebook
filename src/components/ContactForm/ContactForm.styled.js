@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const Button = styled.button`
     outline: none;
     cursor: pointer;
@@ -19,13 +18,6 @@ export const Button = styled.button`
     }
 `;
 
-export const InputField = styled.input`
-    outline: none;
-    padding: 5px 8px;
-    margin-bottom: 10px;
-    width: 250px;
-    font-size: 18px;
-`;
 export const DivMyForm = styled.div`
     /* display: flex;
     flex-direction: column; */
