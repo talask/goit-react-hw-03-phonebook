@@ -51,8 +51,7 @@ export const ContactForm = ({contactsChange}) => {
                     name="name"
 
                 />
-                
-                    <ErrorField name="name" component="div" />
+                  <ErrorField name="name" component="div" />
                 
                 <Label>
                     Phone
